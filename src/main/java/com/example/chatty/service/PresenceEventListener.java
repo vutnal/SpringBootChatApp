@@ -24,8 +24,8 @@ public class PresenceEventListener {
 		Presence presence = new Presence();
 		presence.setNodeId("1");
 		presence.setTime(System.currentTimeMillis());
-//		presence.setUserId(event.getUser().getName());
-		presence.setUserId("vijay");
+		presence.setUserId(event.getUser().getName());
+		//presence.setUserId("vijay");
 		presenceManager.updateHeartbeat(presence);
 	}
 	

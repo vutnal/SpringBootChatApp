@@ -35,7 +35,7 @@
                     
                     stompClient.subscribe('/user/'+document.getElementById('from').value+'/queue/specific-user' 
                   		  , function(messageOutput) {
-                  	  alert(messageOutput);
+                  	  //alert(messageOutput);
                       showMessageOutput(JSON.parse(messageOutput.body));
                     });
                     
@@ -74,7 +74,8 @@
     <body onload="disconnect()">
         <div>
             <div>
-                <input type="text" id="from" placeholder="Choose a nickname"/>
+                <h2>Welcome ${pageContext.request.userPrincipal.name}</h2>
+                <input type="hidden" id="from" value="${pageContext.request.userPrincipal.name}">
             </div>
             <br />
             <div>
@@ -86,7 +87,7 @@
             <br />
             <div id="conversationDiv">
 	            <div>
-	                <input type="text" id="to" placeholder="Choose a nickname"/>
+	                <input type="text" id="to" placeholder="Send To"/>
 	            </div>
                 <input type="text" id="text" placeholder="Write a message..."/>
                 <button id="sendMessage" onclick="sendMessage();">Send</button>
