@@ -5,6 +5,7 @@ import com.example.chatty.service.SecurityService;
 import com.example.chatty.service.UserService;
 import com.example.chatty.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,10 +38,10 @@ public class UserController {
         }
         userService.save(userForm);
         securityService.autoLogin(userForm.getUsername(),userForm.getPasswordConfirm());
-        return "redirect:/chat";
+        return "redirect:/welcome";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/jsp/login")
     public String login(Model model, String error, String logout){
         if(error !=null){
             model.addAttribute("error","UserName or Password is Invalid");
@@ -48,9 +49,14 @@ public class UserController {
         if(logout != null){
             model.addAttribute("message", "You have been logged out successfully.");
         }
-        return "login";
+        return "jsp/login";
     }
-    @GetMapping({"/" , "/chat"})
+    @GetMapping({"/","/welcome"})
+    public String welcome(Model model){
+        return "welcome";
+    }
+
+    @GetMapping("/chat")
     public String chat(Model model){
         return "chat";
     }
