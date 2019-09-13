@@ -1,6 +1,7 @@
 package com.example.chatty.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -22,13 +23,11 @@ import com.example.chatty.model.Message;
 @Configuration
 public class RedisConfiguration {
 
-	//@Value("${spring.redis.host}")
+	@Value("${spring.redis.host}")
+	private String REDIS_HOSTNAME;
 
-	private String REDIS_HOSTNAME = "localhost";
-
-	//@Value("${spring.redis.port}")
-
-	private int REDIS_PORT =6379;
+	@Value("${spring.redis.port}")
+	private int REDIS_PORT;
 
 	@Bean
 	protected JedisConnectionFactory jedisConnectionFactory() {

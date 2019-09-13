@@ -1,0 +1,17 @@
+version: '2.2'
+services:
+  chatty:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: chattyweb
+    links:
+      - redis
+    ports:
+      - "8080:8080"
+  redis:
+    image: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+
