@@ -1,5 +1,6 @@
 package com.example.chatty.service;
 
+import com.example.chatty.util.ChatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
@@ -22,10 +23,9 @@ public class PresenceEventListener {
 	private void handleSessionConnected(SessionConnectEvent event) {
 		System.out.println("Connected....");
 		Presence presence = new Presence();
-		presence.setNodeId("1");
+		presence.setNodeId(ChatUtil.getUniqueNodeId());
 		presence.setTime(System.currentTimeMillis());
 		presence.setUserId(event.getUser().getName());
-		//presence.setUserId("vijay");
 		presenceManager.updateHeartbeat(presence);
 	}
 	

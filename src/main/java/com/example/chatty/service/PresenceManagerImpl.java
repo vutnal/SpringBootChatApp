@@ -28,4 +28,9 @@ public class PresenceManagerImpl implements PresenceManager {
 		this.presenceRedisUtil.setExpire(TABLE_PRESENCE, 1, TimeUnit.DAYS);
 	}
 
+	@Override
+	public Presence getHeartbeat(String userName) {
+		return this.presenceRedisUtil.getValue(PRESENCE + userName);
+	}
+
 }

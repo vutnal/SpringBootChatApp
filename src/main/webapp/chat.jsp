@@ -38,6 +38,13 @@
                   	  //alert(messageOutput);
                       showMessageOutput(JSON.parse(messageOutput.body));
                     });
+
+                    stompClient.subscribe('/user/'+document.getElementById('from').value+'presence'
+                        , function (messageOutput) {
+                            alert(messageOutput);
+                            showPresenceInfo(JSON.parse(messageOutput.body));
+                        }
+                    )
                     
                     
                     
