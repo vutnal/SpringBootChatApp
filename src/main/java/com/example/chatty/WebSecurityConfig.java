@@ -24,43 +24,47 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
-        return  new BCryptPasswordEncoder();
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/resources/**").permitAll()
+                .antMatchers("/resources/**").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/h2-console").permitAll()
                 .antMatchers("/login").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                    .loginPage("/jsp/login")
-                    .loginProcessingUrl("/login")
-                    .permitAll()
-                    .defaultSuccessUrl("/welcome")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .and()
+                .loginPage("/jsp/login")
+                .loginProcessingUrl("/login")
+                .permitAll()
+                .defaultSuccessUrl("/welcome")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and()
                 .logout()
-                    .permitAll();
+                .permitAll();
     }
+
     @Bean
-    public AuthenticationManager customAuthenticationManager() throws Exception{
+    public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();
     }
-@Bean
-    ServletRegistrationBean h2servletRegistration(){
-        ServletRegistrationBean registrationBean = new ServletRegistrationBean( new WebdavServlet());
+
+    @Bean
+    ServletRegistrationBean h2servletRegistration() {
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebdavServlet());
         registrationBean.addUrlMappings("/h2-console/*");
         return registrationBean;
     }
+
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
         auth.parentAuthenticationManager(customAuthenticationManager());
 
