@@ -15,3 +15,15 @@ services:
     ports:
       - "6379:6379"
 
+  mysqldb:
+    image: mysql:8
+    hostname: mysqldb
+    ports:
+      - '3307:3307'
+    expose:
+      - '3307'
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=testdb
+
