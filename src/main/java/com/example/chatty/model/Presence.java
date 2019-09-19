@@ -25,5 +25,13 @@ public class Presence implements Serializable{
 		this.time = time;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Presence{" +
+				"nodeId='" + nodeId + '\'' +
+				", userId='" + userId + '\'' +
+				", time=" + time +
+				'}';
+	}
+
 }

@@ -1,9 +1,12 @@
 package com.example.chatty.controller;
 
+import com.example.chatty.model.Presence;
 import com.example.chatty.model.User;
+import com.example.chatty.service.PresenceManager;
 import com.example.chatty.service.SecurityService;
 import com.example.chatty.service.UserService;
 import com.example.chatty.validator.UserValidator;
+import org.apache.el.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Controller
 public class UserController {
@@ -23,6 +31,9 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private PresenceManager presenceManager;
 
     @GetMapping("/registration")
     public String registration(Model model){
@@ -60,4 +71,16 @@ public class UserController {
     public String chat(Model model){
         return "chat";
     }
+
+//    @GetMapping("/user/presence")
+//    public List<Presence> getPresenseInfomation() {
+//        List presenceList = new ArrayList();
+//        List<User> userList = userService.getAllusers();
+//        presenceList = StreamSupport.stream(userList.spliterator(), false)
+//                .filter((user) -> user.getUsername().equals("test"))
+//                .map(user ->
+//                        presenceManager.getHeartbeat(user.getUsername()))
+//                                .collect(Collectors.toList());
+//        return presenceList;
+//    }
 }

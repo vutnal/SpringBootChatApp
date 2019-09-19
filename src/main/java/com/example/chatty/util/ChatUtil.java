@@ -9,19 +9,13 @@ import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 public class ChatUtil {
+    private static UUID nodeId = UUID.randomUUID();
 
     public static String getUniqueNodeId() {
-        String hostName = "";
-        InetAddress ip;
-        try {
-            ip = InetAddress.getLocalHost();
-            hostName = DigestUtils.md5DigestAsHex(ip.getHostName().getBytes());
-        }catch (UnknownHostException e){
-            e.printStackTrace();
-        }
-        return hostName;
+        return nodeId.toString();
     }
 
     public static void main(String[] args){

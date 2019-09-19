@@ -38,15 +38,6 @@
                   	  //alert(messageOutput);
                       showMessageOutput(JSON.parse(messageOutput.body));
                     });
-
-                    stompClient.subscribe('/user/'+document.getElementById('from').value+'presence'
-                        , function (messageOutput) {
-                            alert(messageOutput);
-                            showPresenceInfo(JSON.parse(messageOutput.body));
-                        }
-                    )
-                    
-                    
                     
                 });
             }
@@ -57,6 +48,13 @@
                 }
                 setConnected(false);
                 console.log("Disconnected");
+            }
+            //Poll for presence data
+            function pollPresence(){
+                $.get('/user/presence', function(data) {
+                    alert(data);  // process results here
+                    setTimeout(pollPresence,5000);
+                });
             }
              
             function sendMessage() {
@@ -102,6 +100,7 @@
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     </body>
 </html>

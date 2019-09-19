@@ -33,4 +33,8 @@ public class PresenceManagerImpl implements PresenceManager {
 		return this.presenceRedisUtil.getValue(PRESENCE + userName);
 	}
 
+	@Override
+	public Presence getPresenceInfo(String userName){
+		return this.presenceRedisUtil.getMapAsSingleEntry(TABLE_PRESENCE, PRESENCE+userName);
+	}
 }

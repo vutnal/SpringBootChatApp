@@ -1,5 +1,6 @@
 package com.example.chatty.config;
 
+import com.example.chatty.util.ChatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -85,7 +86,8 @@ public class RedisConfiguration {
 	
 	@Bean
 	ChannelTopic topic() {
-	    return new ChannelTopic("payments");
+	    String nodeId = ChatUtil.getUniqueNodeId();
+		return new ChannelTopic(nodeId+"-topic");
 	}
 	
 	@Autowired

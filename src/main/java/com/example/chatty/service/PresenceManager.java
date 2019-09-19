@@ -6,5 +6,6 @@ public interface PresenceManager {
 	
 	void updateHeartbeat(Presence presence);
 	public Presence getHeartbeat(String userName);
+	public Presence getPresenceInfo(String userName);
 
 }

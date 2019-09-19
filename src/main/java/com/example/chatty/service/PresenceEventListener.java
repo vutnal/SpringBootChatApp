@@ -26,6 +26,7 @@ public class PresenceEventListener {
 		presence.setNodeId(ChatUtil.getUniqueNodeId());
 		presence.setTime(System.currentTimeMillis());
 		presence.setUserId(event.getUser().getName());
+		System.out.println(presence.toString());
 		presenceManager.updateHeartbeat(presence);
 	}
 	
